@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url("C:\\Users\\USER\\Downloads\\bdt-project\\backend-flask\\images\\background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        h1 {
+            color: #007bff;
+            font-size: 60px;
+            font-weight: bolder;
+        }
+        h3 {
+            color: #007bff;
+            font-size: 40px;
+            font-weight: bolder;
+        }
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        a.button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulation Results For Battery Algorithms</h1>
+    <!-- <form action="/download" method="get">
+        <button type="submit" download="output.csv">Download CSV</button>
+    </form> -->
+    <a class="button" href="{{ url_for('soh', _external=True) }}">Download Output</a>
+    <p>{{ prediction }}</p>
+    <h2>Output Description:</h2>
+    <pre>{{ soc_text }}</pre>
+    <h3>Visualization of Simulation</h3>
+    <div id="plotly-figure" style="margin: 0 auto;"></div>
+    <div id="plotly-figure-temp" style="margin: 0 auto;"></div>
+    <div id="plotly-figure-soc" style="margin: 0 auto;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var plotJson = JSON.parse('{{ plot_json|safe }}');
+        Plotly.newPlot('plotly-figure', plotJson);
+        var plotJson_1 = JSON.parse('{{ plot_json_1|safe }}');
+        Plotly.newPlot('plotly-figure-temp', plotJson_1);
+        var plotJson_2 = JSON.parse('{{ plot_json_2|safe }}');
+        Plotly.newPlot('plotly-figure-soc', plotJson_2);
+    </script>
+</body>
+</html>
